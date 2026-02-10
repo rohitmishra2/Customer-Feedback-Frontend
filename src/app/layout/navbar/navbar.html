@@ -1,0 +1,35 @@
+<nav class="navbar-custom">
+  <div class="nav-container">
+    <div class="nav-brand" (click)="goHome()">
+      <div class="brand-icon">
+        <i class="bi bi-cpu-fill"></i>
+      </div>
+      <div class="brand-details">
+        <span class="brand-text">Feedback<span class="text-indigo-400">System</span></span>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      
+      <div class="user-status-pill" *ngIf="isLoggedIn()">
+        <span class="status-indicator" 
+              [ngClass]="isAdmin() ? 'bg-admin' : 'bg-user'">
+        </span>
+        <span class="status-label">
+          {{ isAdmin() ? 'Admin Active' : 'User Active' }}
+        </span>
+      </div>
+
+      <div class="auth-actions">
+        <a *ngIf="!isLoggedIn()" routerLink="/login" class="nav-link-btn">
+          Login
+        </a>
+
+        <button *ngIf="isLoggedIn()" class="logout-btn" (click)="logout()">
+          <i class="bi bi-box-arrow-right me-2"></i>
+          <span class="d-none d-sm-inline">Logout</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>

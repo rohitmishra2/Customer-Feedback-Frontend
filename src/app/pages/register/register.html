@@ -1,0 +1,82 @@
+<div class="auth-page-wrapper">
+  <div *ngIf="toastMsg" class="custom-toast" [ngClass]="toastType">
+  <div class="d-flex align-items-center gap-2">
+    <i class="bi" [ngClass]="toastType === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"></i>
+    {{ toastMsg }}
+  </div>
+</div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="register-glass-card">
+    <div class="auth-header text-center">
+      <div class="auth-logo">
+        <i class="bi bi-person-plus-fill"></i>
+      </div>
+      <h2 class="auth-title">Create Account</h2>
+      <p class="auth-subtitle">Join the professional feedback network</p>
+    </div>
+
+    <div class="status-banner success mb-4" *ngIf="message">
+      <i class="bi bi-check-circle-fill me-2"></i> {{ message }}
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="modern-auth-form">
+      
+      <div class="input-group-3d mb-4">
+        <label class="micro-label">Full Name</label>
+        <div class="input-wrapper">
+          <i class="bi bi-person icon-prefix"></i>
+          <input 
+            type="text" 
+            class="custom-input-3d" 
+            placeholder="e.g. Rohit Kumar"
+            formControlName="fullName" 
+          />
+        </div>
+      </div>
+
+      <div class="input-group-3d mb-4">
+        <label class="micro-label">Email Address</label>
+        <div class="input-wrapper">
+          <i class="bi bi-envelope icon-prefix"></i>
+          <input 
+            type="email" 
+            class="custom-input-3d" 
+            placeholder="rohit@example.com"
+            formControlName="email" 
+            [class.is-invalid]="form.get('email')?.invalid && form.get('email')?.touched" 
+          />
+        </div>
+        <div class="validation-msg" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+          Valid email is required
+        </div>
+      </div>
+
+      <div class="input-group-3d mb-4">
+        <label class="micro-label">Security Password</label>
+        <div class="input-wrapper">
+          <i class="bi bi-shield-lock icon-prefix"></i>
+          <input 
+            type="password" 
+            class="custom-input-3d" 
+            placeholder="••••••••"
+            formControlName="password"
+            [class.is-invalid]="form.get('password')?.invalid && form.get('password')?.touched"
+          />
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary-3d w-100" [disabled]="loading || form.invalid">
+  <span *ngIf="!loading">Register Account</span>
+  <span *ngIf="loading">Processing...</span>
+  <i class="bi bi-arrow-right-short ms-1" *ngIf="!loading"></i>
+</button>
+
+      <p class="auth-footer">
+        Already have an account? 
+        <a routerLink="/login" class="link-highlight">Login here</a>
+      </p>
+    </form>
+  </div>
+</div>

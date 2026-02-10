@@ -1,0 +1,57 @@
+<div class="feedback-page-wrapper">
+  <div class="feedback-glass-card">
+    <div class="form-header text-center">
+      <div class="brand-badge">
+        <i class="bi bi-chat-heart-fill"></i>
+      </div>
+      <h2 class="form-title">Share Your Thoughts</h2>
+      <p class="form-subtitle">Help us shape the future of our products.</p>
+    </div>
+
+    <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()" class="modern-3d-form">
+      <div class="input-group-3d">
+        <label class="micro-label">Selected Product</label>
+        <div class="select-box">
+          <select class="custom-select" formControlName="productId">
+            <option value="" disabled selected>{{ loadingProducts ? 'Syncing Catalog...' : 'Choose a product' }}</option>
+            <option *ngFor="let p of products" [value]="p.productId">{{ p.name }}</option>
+          </select>
+          <i class="bi bi-chevron-down select-arrow"></i>
+        </div>
+      </div>
+
+      <div class="input-group-3d mt-4">
+        <label class="micro-label">Overall Rating</label>
+        <div class="star-container-3d">
+          <div class="star-rating">
+            <span *ngFor="let star of [1,2,3,4,5]" 
+                  (click)="feedbackForm.patchValue({rating: star})"
+                  [class.active]="feedbackForm.get('rating')?.value >= star"
+                  class="star-item">
+              &#9733;
+            </span>
+          </div>
+          <div class="rating-badge" *ngIf="feedbackForm.get('rating')?.value">
+            {{ feedbackForm.get('rating')?.value }}/5
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group-3d mt-4">
+        <label class="micro-label">Your Experience</label>
+        <textarea class="custom-textarea" 
+                  formControlName="comments" 
+                  placeholder="What did you like? What can we improve?"></textarea>
+      </div>
+
+      <button type="submit" [disabled]="feedbackForm.invalid" class="btn-primary-3d">
+        <span class="btn-text">Send Feedback</span>
+        <i class="bi bi-send-fill btn-icon"></i>
+      </button>
+    </form>
+
+    <div class="status-banner-3d" *ngIf="message" [class.success]="message.includes('success')">
+      <i class="bi bi-info-circle-fill me-2"></i> {{ message }}
+    </div>
+  </div>
+</div>

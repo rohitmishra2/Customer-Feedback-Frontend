@@ -1,0 +1,72 @@
+<div class="auth-page-wrapper">
+  <div *ngIf="toastMsg" class="custom-toast" [ngClass]="toastType">
+  <div class="d-flex align-items-center gap-2">
+    <i class="bi" [ngClass]="toastType === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'"></i>
+    {{ toastMsg }}
+  </div>
+</div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="login-glass-card">
+    <div class="auth-header text-center">
+      <div class="auth-logo">
+        <i class="bi bi-shield-lock-fill"></i>
+      </div>
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Secure access to your Feedback System</p>
+    </div>
+
+    <div class="status-banner error mb-4" *ngIf="errorMsg">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i> {{ errorMsg }}
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="modern-auth-form">
+      <div class="input-group-3d mb-4">
+        <label class="micro-label">Email</label>
+        <div class="input-wrapper">
+          <i class="bi bi-envelope icon-prefix"></i>
+          <input 
+            type="email" 
+            class="custom-input-3d" 
+            placeholder="rohit@company.com"
+            formControlName="email" 
+            [class.is-invalid]="form.get('email')?.invalid && form.get('email')?.touched" 
+          />
+        </div>
+        <div class="validation-msg" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+          Invalid email address
+        </div>
+      </div>
+
+      <div class="input-group-3d mb-4">
+  <label class="micro-label">Password</label>
+  <div class="input-wrapper">
+    <i class="bi bi-shield-lock icon-prefix"></i>
+    
+    <input 
+      [type]="showPassword ? 'text' : 'password'" 
+      class="custom-input-3d pe-5" 
+      placeholder="••••••••"
+      formControlName="password"
+      [class.is-invalid]="form.get('password')?.invalid && form.get('password')?.touched"
+    />
+
+    <button type="button" class="password-toggle" (click)="togglePasswordVisibility()">
+      <i class="bi" [ngClass]="showPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+    </button>
+  </div>
+</div>
+
+      <button class="btn-primary-3d w-100" [disabled]="loading || form.invalid">
+        <span>{{ loading ? 'Authenticating...' : 'Login' }}</span>
+        <i class="bi bi-arrow-right-short ms-1" *ngIf="!loading"></i>
+      </button>
+
+      <p class="register-footer">
+        New user? 
+        <a routerLink="/register" class="link-highlight">Create an account</a>
+      </p>
+    </form>
+  </div>
+</div>

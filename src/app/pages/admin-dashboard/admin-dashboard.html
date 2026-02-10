@@ -1,0 +1,67 @@
+<div class="container py-5" style="max-width: 1050px;">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="fw-bold text-dark mb-1" style="letter-spacing: -0.5px;">User Feedback</h2>
+      <p class="text-secondary small">Analyze product ratings and customer sentiments.</p>
+    </div>
+    <a class="btn-back-link" routerLink="/admin">Back</a>
+  </div>
+
+  <div class="custom-toolbar p-3 mb-4">
+    <div class="d-flex align-items-center gap-3 flex-wrap">
+      <div class="filter-group">
+        <label class="filter-label">Filter by Rating</label>
+        <select class="custom-select" [(ngModel)]="selectedRating" (change)="applyFilter()">
+          <option value="ALL">All Ratings</option>
+          <option *ngFor="let r of [5,4,3,2,1]" [value]="r">{{ r }} Stars</option>
+        </select>
+      </div>
+      <span class="count-pill ms-auto">Showing: {{ filteredFeedbacks.length }}</span>
+    </div>
+  </div>
+
+  <div class="feedback-grid" *ngIf="filteredFeedbacks.length; else emptyState">
+    <div class="feedback-card" *ngFor="let f of filteredFeedbacks">
+      <div class="card-side-accent" [ngClass]="'rating-' + f.rating"></div>
+      
+      <div class="card-body-custom">
+        <div class="row align-items-center g-3">
+          <div class="col-lg-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="avatar-sm">{{ f.userName.charAt(0) }}</div>
+              <div>
+                <h4 class="user-name">{{ f.userName }}</h4>
+                <p class="user-email">{{ f.userEmail }}</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 text-lg-center">
+            <span class="product-tag">{{ f.productName }}</span>
+          </div>
+
+          <div class="col-lg-2">
+            <div class="rating-box">
+              <span class="rating-num">{{ f.rating }}</span>
+              <span class="rating-star">★</span>
+            </div>
+          </div>
+
+          <div class="col-lg-3">
+            <p class="comment-text">"{{ f.comment }}"</p>
+          </div>
+
+          <div class="col-lg-2 text-lg-end">
+            <span class="date-text">{{ f.createdAt ? (f.createdAt | date:'dd-MMM-yyyy') : '-' }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #emptyState>
+    <div class="empty-box-3d">
+      <p>No feedback matches the selected rating.</p>
+    </div>
+  </ng-template>
+</div>
