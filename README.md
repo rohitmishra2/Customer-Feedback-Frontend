@@ -1,59 +1,174 @@
-# CustomerFeedbackUi
+🌐 Customer Feedback Management System – Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+Wipro Preskilling Capstone Project
 
-## Development server
+This repository contains the Angular frontend for the Customer Feedback Management System. The application is designed to allow users to interact with products by submitting feedback, while providing administrators with a secure, role-based interface to manage products and review user sentiments.
 
-To start a local development server, run:
+✨ Features
 
-```bash
+👤 User Experience
+
+Secure Registration & Login: User-friendly onboarding process.
+
+Submit Feedback:
+
+Select products from a dynamic list.
+
+Provide a rating (1–5 stars).
+
+Write detailed comments.
+
+JWT Authentication: Secure session management.
+
+🛠 Admin Dashboard
+
+Secure Access: Protected login specifically for administrators.
+
+Feedback Management: View all submitted feedback in a comprehensive list.
+
+Filtering: Quickly filter user feedback based on ratings.
+
+Product Management: Full CRUD capabilities (Add, Update, and Soft-Delete products).
+
+RBAC: Strict Role-Based Access Control ensuring data security.
+
+🧰 Tech Stack
+
+Component
+
+Technology
+
+Framework
+
+Angular (Standalone Components)
+
+Styling
+
+Bootstrap 5 + Custom CSS
+
+Forms
+
+Reactive Forms
+
+Routing
+
+Angular Router
+
+State/API
+
+HttpClient & Observables
+
+Security
+
+JWT Token via HTTP Interceptor
+
+🔐 Authentication & Security
+
+The application implements robust security measures:
+
+JWT Storage: Tokens are securely stored in localStorage upon login.
+
+Route Protection:
+
+AuthGuard: Protects general authenticated routes.
+
+AdminGuard: Restricts access to admin-specific pages.
+
+API Security: An HTTP Interceptor automatically attaches the Bearer token to all outgoing API requests.
+
+🚀 Getting Started
+
+Follow these instructions to set up the project locally.
+
+Prerequisites
+
+Node.js: v18+ (Recommended)
+
+Angular CLI: v17+
+
+Backend: Ensure the Spring Boot API is running.
+
+🔧 Installation
+
+Clone the repository (if you haven't already):
+
+git clone <repository-url>
+cd <project-folder>
+
+
+Install Dependencies:
+
+npm install
+
+
+▶️ Run Development Server
+
+Launch the application:
+
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+Open your browser and navigate to:
+http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+The app will automatically reload if you change any of the source files.
 
-```bash
-ng generate component component-name
-```
+🔄 Backend Integration
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This frontend acts as a client for the Spring Boot backend.
 
-```bash
-ng generate --help
-```
+Expected Backend Base URL:
 
-## Building
+http://localhost:8085/api
 
-To build the project run:
 
-```bash
+⚠️ Note: Ensure the backend service is running on port 8085 before attempting to log in or submit feedback.
+
+🧪 Sample Functional Flow
+
+User Registration: A new user registers and logs in.
+
+Feedback Submission: The user selects a product, rates it, and adds a comment.
+
+Admin Access: An admin logs into the dashboard.
+
+Review: Admin views the new feedback and filters by low/high ratings.
+
+Management: Admin adds a new product or updates an existing one.
+
+🏗 Build & Test
+
+Build for Production
+
+To generate build artifacts for deployment:
+
 ng build
-```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-## Running unit tests
+Artifacts will be stored in the dist/ directory.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+Unit Tests
 
-```bash
+Run unit tests via Karma:
+
 ng test
-```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+End-to-End Tests
 
-```bash
+Run e2e tests:
+
 ng e2e
-```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
-## Additional Resources
+📁 Project Structure
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+src/
+ ├── app/
+ │   ├── pages/          # Login, Register, User Feedback, Admin Dashboard
+ │   ├── services/       # Auth, Feedback, Product services
+ │   ├── guards/         # AuthGuard, AdminGuard
+ │   ├── interceptors/   # JWT Interceptor
+ │   ├── layout/         # Navbar & Footer components
+ │   └── app.routes.ts   # Main routing configuration
+ └── assets/             # Static images and global styles
